@@ -16,7 +16,7 @@ class User
         $this->email = $email;
         $this->pass = $pass;
     }
-
+   
     public function getId()
     {
         return $this->id;

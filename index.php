@@ -7,12 +7,12 @@
 </head>
 <body>
     <?php 
-     include_once('models/user.model.php');
+     include "controllers/users.controller.php";
 
-     $objeto =new User('1','1','Jaime Sazo','eje@eje.com','5fd85d5sa6s5dw6d9a');
+     $user =new DaoUser;
+     $user->addUser(2,'Mario Lopez','mario@eje.com','sdlps45d4s45');
+     echo json_encode($user->getUsers());
 
-     echo "<h1>".$objeto->getName()."</h1>";
-     echo "<h1>".$objeto->getEmail()."</h1>";
 
 
 ?>
