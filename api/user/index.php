@@ -1,25 +1,31 @@
 <?php
 
-
+//Incluimos el dao encargao de hacer el CRUD de usuaios
+include_once('../controllers/users.controller.php');
+$user =new DaoUser;
 ///Get requests
-
 //echo 'Informacion: '. file_get_contents('php://input');
-    header("Content-type: application/json");
-switch ($_SERVER['REQUEST_METHOD']) {
+
+// Estabablecmos el modo de respuesta de tipo JSON
+ header("Content-type: application/json");
+
+
+switch ($_SERVER['REQUEST_METHOD']) {// Evaluamos el modo de request si es GET, POST, PUT, DELETE
     case 'GET':
-        if(isset($_GET['id'])){
+        if(isset($_GET['id'])){// Evaluamos si viene parametro id para consulta de un usuario
+            
             $param=$_GET['id'];
             echo 'method Get id: '.$param;
         }else{
-            echo ' Get Users';
+            echo json_encode($user->getUsers());
         }
                
         break;
 
     case 'POST':
-        $_POST= json_decode(file_get_contents('php://input'),true);
-
-        $result['message']=$_POST;
+        $_POST= json_decode(file_get_contents('php://input'),true); // Almacenamos las respuesta de app cliente
+        $user->addUser($_POST['rol'],$_POST['name'],$_POST['email'],$_POST['pass']);
+        $result['message']="Register Success user: ". $_POST['name'];
 
         echo json_encode($result); 
 
