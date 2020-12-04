@@ -15,7 +15,8 @@ switch ($_SERVER['REQUEST_METHOD']) {// Evaluamos el modo de request si es GET, 
         if(isset($_GET['id'])){// Evaluamos si viene parametro id para consulta de un usuario
             
             $param=$_GET['id'];
-            echo 'method Get id: '.$param;
+            
+            echo json_encode($user->getUserId($param));// retornamos el usuario encontrado
         }else{
             echo json_encode($user->getUsers());
         }

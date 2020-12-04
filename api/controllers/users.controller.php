@@ -1,6 +1,6 @@
 <?php
 
-include "base.connect.php";
+include "../include/base.connect.php";
 
 
 class DaoUser extends Base{
@@ -11,6 +11,16 @@ class DaoUser extends Base{
         $sql= "SELECT * FROM tt_users";
         $stmt= $this->connect()->prepare($sql);
         $stmt->execute();
+
+        while($result = $stmt->fetchAll()){
+            return $result;
+        }
+    }
+    // function ge user
+    public function getUserId($id){
+        $sql= "SELECT * FROM tt_users WHERE ID_USER=?";
+        $stmt= $this->connect()->prepare($sql);
+        $stmt->execute([$id]);
 
         while($result = $stmt->fetchAll()){
             return $result;
